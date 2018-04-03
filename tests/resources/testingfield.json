@@ -1,0 +1,32 @@
+{
+  "field" : [
+    ["X","X","X","X","X","X","X"," "," "," "],
+    ["X","X","X","X","X","X","X"," "," "," "],
+    ["X","X","X","X","X","X","X"," "," "," "],
+    ["X","X","X","X","X","X","X"," "," "," "],
+    ["X","X","X","X","X","X","X"," "," "," "],
+    ["X","X","X","X","X","X","X","X","X","X"],
+    ["X","X","X","X","X","X","X","X","X","X"],
+    ["X","X","X","X","X","X","X","X","X","X"],
+    ["X","X","X","X","X","X","X","X","X","X"],
+    ["X","X","X","X","X","X","X","X","X","X"]
+  ],
+  "sprinklers" : [
+    "Level1"
+  ],
+  "weights" : {
+    "numSprinklers" : -0.1,
+    "numWetPatches" : 1.0,
+    "numDryPatches" : 0.15,
+    "numPlantablePatches" : 0.75
+  },
+  "strategies" : [
+    {
+      "type": "RANDOM",
+      "data": {
+        "iterations": 100,
+        "numFieldsPerIteration": 100
+      }
+    }
+  ]
+}
