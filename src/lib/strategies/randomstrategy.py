@@ -13,6 +13,9 @@ class RandomStrategy(BaseStrategy):
         maxX = len(field.field)-1
         maxY = len(field.field[0])-1
         sprinklers = list(self.sprinklers.values())
+        numFields = self.iterations * self.numFieldsPerIteration
+        currentFieldCount = 0
+        self.logger.info("Generating %s fields..." % numFields)
 
         for iteration in range(0,self.iterations):
             self.logger.debug("Starting iteration %s" % iteration)
@@ -26,10 +29,12 @@ class RandomStrategy(BaseStrategy):
                 sprinkler = sprinklers[random.randint(0, len(sprinklers)-1)]()
                 newField.placeSprinkler(sprinkler, (random.randint(0, maxX), random.randint(0, maxY)))
                 score = self.scorer.calculateScore(newField)
-
                 if score > bestScoreThisIteration:
                     bestScoreThisIteration = score
                     bestFieldThisIteration = newField
+                currentFieldCount += 1
+                if currentFieldCount % 1000 == 0:
+                    self.logger.info("Generated %s fields. %s percent complete" % (currentFieldCount, (currentFieldCount / numFields) * 100))
 
             currentBestScore = bestScoreThisIteration
             currentBestField = bestFieldThisIteration

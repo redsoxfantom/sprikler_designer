@@ -15,13 +15,15 @@ class StrategyManager:
         possibleFields = []
         for strategy in self.strategies:
             self.logger.info("Executing %s strategy..." % strategy.__class__.__name__)
-            possibleFields.append(strategy.executeStrategy(field))
+            possibleFields.append((strategy.executeStrategy(field), strategy.__class__.__name__))
             self.logger.info("%s strategy complete" % strategy.__class__.__name__)
         currentBestScore = self.scorer.calculateScore(field)
         currentBestField = field
+        currentBestStrategy = "NONE"
         for possibleField in possibleFields:
-            score = self.scorer.calculateScore(possibleField)
+            score = self.scorer.calculateScore(possibleField[0])
             if score > currentBestScore:
                 currentBestScore = score
-                currentBestField = possibleField
-        return currentBestScore, currentBestField
+                currentBestField = possibleField[0]
+                currentBestStrategy = possibleField[1]
+        return currentBestScore, currentBestField, currentBestStrategy
